@@ -1,33 +1,27 @@
+import { Link } from "react-router-dom";
+
 export default function ProductCard(props) {
-  const { name, image, price } = props;
-
-  return (
-    <div className="group flex flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition hover:shadow-lg">
-      {/* Product image */}
-      <div className="relative h-48 w-full overflow-hidden">
-        <img
-          src={image}
-          alt={name}
-          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-        />
-      </div>
-
-      {/* Content */}
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        <h2 className="text-lg font-semibold text-gray-800 line-clamp-2">
-          {name}
-        </h2>
-
-        <p className="mt-auto text-xl font-bold text-emerald-600">
-          {typeof price === 'number' ? `Rs. ${price.toLocaleString()}` : price}
-        </p>
-
-        <button
-          className="mt-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
-        >
-          View more
-        </button>
-      </div>
-    </div>
-  );
+	const product = props.product;
+	return (
+		<Link to={"/overview/"+product.productId}  className="w-[300px] h-[400px] flex flex-col  shrink-0 shadow-2xl rounded-2xl overflow-hidden">
+			<img src={product.images[0]} className="w-full h-[275px] object-cover" />
+			<div className="w-full h-[125px]  flex flex-col p-[3px]">
+				<span className="text-gray-400 text-[12px]">{product.productId}</span>
+				<h1 className="text-lg font-bold">
+					{product.name}{" "}
+					<span className="text-gray-500 text-[14px]">{product.category}</span>
+				</h1>
+				<div>
+					{product.labelledPrice > product.price ? (
+						<p>
+                            <span className="line-through mr-[10px]">{product.labelledPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                            <span>{product.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                        </p>
+					) : (
+						<span>{product.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+					)}
+				</div>
+			</div>
+		</Link>
+	);
 }
