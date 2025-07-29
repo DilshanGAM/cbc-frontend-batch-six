@@ -14,7 +14,7 @@ function App() {
 			<div className="w-full h-screen flex justify-center items-center">
 					<Toaster position="top-right"/>
 					<Routes path="/">						
-						<Route path="/login" element={<LoginPage/>}/>
+		<Route path="/login" element={<LoginPage/>}/>
 						<Route path="/test" element={<TestPage/>}/>
 						<Route path="/register" element={<RegisterPage/>}/>
 						<Route path="/admin/*" element={<AdminPage/>}/>
